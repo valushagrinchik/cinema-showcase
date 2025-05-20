@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Film {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  categories Category[]
+
+  @@map("films")
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  parentId      Int?
+  parent        Category?  @relation("CategoriesFilms", fields: [parentId], references: [id])
+  subcategories Category[] @relation("CategoriesFilms")
+
+  films Film[]
+
+  @@map("categories")
+}
