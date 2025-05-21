@@ -93,20 +93,6 @@ describe('CategoriesRepository', () => {
       expect(res[0].subcategories.length).toEqual(0)
       expect(res[1].subcategories.length).toEqual(4)
       expect(res[1].subcategories[0].name).toEqual(updatedCategories[1].updatedSubCategories![0].name)
-      // expect(res[1].subcategories[1].name).toEqual(updatedCategories[1].subCategories[1].name)
     });
-
-    // it('should delete categories', async () => {
-    //   const deletedCategories = [{
-    //     id: 1
-    //   }, {
-    //     id: 2
-    //   }]
-    //   await service.update({
-    //     deletedCategories,
-    //   })
-    //   const res = await service.findAll()
-    //   expect(res.length).toEqual(2)
-    // });
   })
 });
