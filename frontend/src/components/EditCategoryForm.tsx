@@ -11,6 +11,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import type { FilmDto } from "../shared/api/cinemaShowcaseApi";
 import type { ActiveCategory } from "../shared/types";
+import { v4 as uuidv4 } from 'uuid';
 
 const SubCategoryBlock = ({ control, register, subIdx, removeSub, films, getValues}) => {
 
@@ -110,7 +111,7 @@ export const EditCategoryForm = ({ category, films, onSubmit }: EditCategoryForm
       <Button
         variant="outlined"
         startIcon={<AddIcon />}
-        onClick={() => appendSub({ id: null, name: "", filmIds: [] })}
+        onClick={() => appendSub({ id: uuidv4(), name: "", filmIds: [] })}
         sx={{ mb: 2 }}
       >
         Добавить подкатегорию

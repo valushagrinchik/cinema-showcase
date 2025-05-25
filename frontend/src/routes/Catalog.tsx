@@ -11,6 +11,7 @@ import { FilmsList } from '../components/FilmsList';
 import { Modal } from '../components/Modal';
 import type { ActiveCategory } from '../shared/types';
 import { getCategoryDiff } from '../shared/utils/diffCategories';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Catalog() {
   const [active, setActive] = useState<ActiveCategory>();
@@ -66,7 +67,7 @@ export default function Catalog() {
   
   return <Stack direction="column" spacing={2}>
     <Stack direction="row" spacing={2} justifyContent="space-between">
-      <Button variant="contained" onClick={()=>setActive({id: null, name: 'New', subCategories: []})}>Добавить категорию</Button>
+      <Button variant="contained" onClick={()=>setActive({id: uuidv4(), name: '', subCategories: []})}>Добавить категорию</Button>
       <Button variant="contained" onClick={handleSaveToServer}>Сохранить на сервер</Button>
     </Stack>
     <List>
@@ -91,7 +92,12 @@ export default function Catalog() {
     {active && 
       <Modal open={!!active} setOpen={() => setActive(undefined)}>
         <EditCategoryForm films={films} category={active} onSubmit={(data: ActiveCategory) => {
-          setCategories(categories.map(cat => cat.id == data.id ? data : cat))
+         const existed = categories.find(cat=>cat.id == data.id)
+          if(!existed){
+            setCategories([...categories, data])
+          } else {
+            setCategories(categories.map(cat => cat.id == data.id ? data : cat))
+          }
           setActive(undefined)
         }} />
       </Modal>
