@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -16,6 +16,7 @@
     "db:push:test": "dotenv -e .env.test -- npx prisma db push",
     "db:seed:test": "dotenv -e .env.test -- npx prisma db seed",
     "migrate:test": "dotenv -e .env.test -- npx prisma migrate dev",
+    "migration:create": "pnpm exec prisma migrate dev --name",
     "test": "npm run db:push:test && npm run db:seed:test && jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",

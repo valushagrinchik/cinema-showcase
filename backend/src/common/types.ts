@@ -1,3 +1,5 @@
-import { Category } from "@prisma/client";
+import { Category } from '@prisma/client';
 
-export type PrismaCategoryList = (Category & { subcategories: (Category & { films: { id: number }[] })[] })[]
+export type PrismaCategoryList = (Category & {
+  subcategories: (Category & { films: { id: number }[] })[];
+})[];

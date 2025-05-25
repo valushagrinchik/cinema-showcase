@@ -7,12 +7,12 @@ import { CategoriesDto } from './dto/categories.dto';
 @Controller('categories')
 @ApiTags('Categories')
 export class CategoriesController {
-  constructor(private servise: CategoriesService) { }
+  constructor(private servise: CategoriesService) {}
 
   @Get()
   @ApiResponse({ status: 200, type: CategoriesDto })
   async list() {
-    return { data: await this.servise.findAll() }
+    return { data: await this.servise.findAll() };
   }
 
   @Put()

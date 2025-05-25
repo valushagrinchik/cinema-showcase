@@ -6,11 +6,11 @@ import { FilmsDto } from './dto/films.dto';
 @Controller('films')
 @ApiTags('Films')
 export class FilmsController {
-  constructor(private servise: FilmsService) { }
+  constructor(private servise: FilmsService) {}
 
   @Get()
   @ApiResponse({ status: 200, type: FilmsDto })
   async list() {
-    return { data: await this.servise.findAll() }
+    return { data: await this.servise.findAll() };
   }
 }

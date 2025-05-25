@@ -55,7 +55,7 @@ export class CategoryUpdateDto {
   deletedSubCategories?: SubCategoryDeleteDto[];
 }
 
-export class CategoryDeleteDto extends SubCategoryDeleteDto { }
+export class CategoryDeleteDto extends SubCategoryDeleteDto {}
 
 export class CategoriesUpdateDto {
   @ApiProperty({ type: [CategoryCreateDto], required: false })

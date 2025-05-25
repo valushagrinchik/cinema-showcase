@@ -4,7 +4,7 @@ import { CategoriesUpdateDto } from './dto/categories.update.dto';
 
 @Injectable()
 export class CategoriesService {
-  constructor(private catRepo: CategoriesRepository) { }
+  constructor(private catRepo: CategoriesRepository) {}
 
   async findAll() {
     const categories = await this.catRepo.findAll();
@@ -18,6 +18,6 @@ export class CategoriesService {
   }
 
   async update(dto: CategoriesUpdateDto) {
-    return this.catRepo.update(dto)
+    return this.catRepo.update(dto);
   }
 }

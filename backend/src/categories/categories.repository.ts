@@ -6,7 +6,7 @@ import { PrismaCategoryList } from '../common/types';
 
 @Injectable()
 export class CategoriesRepository {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async findAll(): Promise<PrismaCategoryList> {
     return this.prisma.category.findMany({
@@ -22,7 +22,7 @@ export class CategoriesRepository {
           },
         },
       },
-    })
+    });
   }
 
   async update({
@@ -36,19 +36,19 @@ export class CategoriesRepository {
           name: cat.name,
           ...(cat.subCategories.length
             ? {
-              subcategories: {
-                create: cat.subCategories.map((subcat) => ({
-                  name: subcat.name,
-                  ...(subcat.filmIds.length
-                    ? {
-                      films: {
-                        connect: subcat.filmIds.map((id) => ({ id })),
-                      },
-                    }
-                    : {}),
-                })),
-              },
-            }
+                subcategories: {
+                  create: cat.subCategories.map((subcat) => ({
+                    name: subcat.name,
+                    ...(subcat.filmIds.length
+                      ? {
+                          films: {
+                            connect: subcat.filmIds.map((id) => ({ id })),
+                          },
+                        }
+                      : {}),
+                  })),
+                },
+              }
             : {}),
         },
       }),
@@ -71,10 +71,10 @@ export class CategoriesRepository {
                 name: subcat.name,
                 ...(subcat.filmIds.length
                   ? {
-                    films: {
-                      connect: subcat.filmIds.map((id) => ({ id })),
-                    },
-                  }
+                      films: {
+                        connect: subcat.filmIds.map((id) => ({ id })),
+                      },
+                    }
                   : {}),
               })),
               update: updatedSubCategories.map((subcat) => ({
@@ -85,10 +85,10 @@ export class CategoriesRepository {
                   name: subcat.name,
                   ...(subcat.filmIds.length
                     ? {
-                      films: {
-                        connect: subcat.filmIds.map((id) => ({ id })),
-                      },
-                    }
+                        films: {
+                          connect: subcat.filmIds.map((id) => ({ id })),
+                        },
+                      }
                     : {}),
                 },
               })),
@@ -100,12 +100,14 @@ export class CategoriesRepository {
         }),
     );
 
-    const deleteQueries = deletedCategories.map(cat => this.prisma.category.delete({ where: { id: cat.id } }))
+    const deleteQueries = deletedCategories.map((cat) =>
+      this.prisma.category.delete({ where: { id: cat.id } }),
+    );
 
     return this.prisma.$transaction([
       ...createQueries,
       ...updateQueries,
-      ...deleteQueries
-    ])
+      ...deleteQueries,
+    ]);
   }
 }
